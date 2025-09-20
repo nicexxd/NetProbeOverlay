@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     private var pendingStart = false
     private var waitingForReady = false
+    private var pendingNotifyOnly = false
     private val handler = Handler(Looper.getMainLooper())
 
     private var overlayReceiver: BroadcastReceiver? = null
@@ -103,6 +104,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startNotifyOnly() {
+        // Android 13+ 先确保通知权限，以免 FGS 启动受限
+        if (Build.VERSION.SDK_INT >= 33) {
+            val granted = ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED
+            if (!granted) {
+                pendingNotifyOnly = true
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), REQ_POST_NOTIF)
+                return
+            }
+        }
         // 直接尝试启动仅通知模式，便于诊断“通知是否可见/前台服务是否能拉起”
         val intent = Intent(this, OverlayService::class.java).apply {
             putExtra(OverlayService.EXTRA_MODE, OverlayService.MODE_NOTIFY_ONLY)
@@ -165,6 +175,18 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQ_POST_NOTIF) {
             val granted = grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
+            if (pendingNotifyOnly) {
+                // 针对仅通知模式的权限回调
+                pendingNotifyOnly = false
+                if (granted) {
+                    startNotifyOnly()
+                } else {
+                    // 权限拒绝也尝试启动，以便提示用户排查
+                    startNotifyOnly()
+                    showResolutionDialog("通知权限未授予，可能导致前台服务通知不可见。")
+                }
+                return
+            }
             if (granted) {
                 actuallyStartOverlayService()
             } else {
