@@ -21,7 +21,7 @@
         <service
             android:name=".overlay.OverlayService"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection|dataSync" />
+            android:foregroundServiceType="dataSync" />
 
         <activity android:name=".MainActivity"
             android:exported="true">

@@ -31,6 +31,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class OverlayService : Service() {
+    companion object {
+        const val EXTRA_MODE = "mode"
+        const val MODE_NOTIFY_ONLY = "notify_only"
+    }
+
     private lateinit var windowManager: WindowManager
     private lateinit var overlayButton: View
     private lateinit var overlayPanel: View
@@ -39,6 +44,8 @@ class OverlayService : Service() {
     private val scope = CoroutineScope(Dispatchers.Main + serviceJob)
 
     private val handler = Handler(mainLooper)
+
+    private var overlaysAdded = false
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -60,28 +67,54 @@ class OverlayService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+        // 仅负责把服务拉到前台，避免后台限制；具体业务移到 onStartCommand
         startAsForeground()
+    }
 
-        if (!hasOverlayPermission()) {
-            Toast.makeText(this, getString(R.string.overlay_permission_rationale), Toast.LENGTH_LONG).show()
-            broadcast("failed", "缺少悬浮窗权限")
-            stopForeground(STOP_FOREGROUND_REMOVE)
-            stopSelf()
-            return
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        val mode = intent?.getStringExtra(EXTRA_MODE)
+        val notifyOnly = (mode == MODE_NOTIFY_ONLY)
+
+        if (notifyOnly) {
+            // 仅测试通知：不触发悬浮窗权限与窗口添加
+            broadcast("ready", "仅通知测试")
+            return START_NOT_STICKY
         }
 
-        windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val addedBtn = addOverlayButtonSafely()
-        val addedPanel = addOverlayPanelSafely()
-        if (!addedBtn || !addedPanel) {
-            // 添加失败（某些系统/ROM限制），安全退出
-            Toast.makeText(this, "悬浮窗添加失败，" + miuiTips(), Toast.LENGTH_LONG).show()
-            broadcast("failed", "系统限制或窗口添加失败")
-            stopForeground(STOP_FOREGROUND_REMOVE)
-            stopSelf()
-        } else {
-            broadcast("ready", null)
+        // 正常模式：检查权限并添加悬浮窗
+        if (!overlaysAdded) {
+            if (!hasOverlayPermission()) {
+                Toast.makeText(this, getString(R.string.overlay_permission_rationale), Toast.LENGTH_LONG).show()
+                broadcast("failed", "缺少悬浮窗权限")
+                stopForeground(STOP_FOREGROUND_REMOVE)
+                stopSelf()
+                return START_NOT_STICKY
+            }
+
+            try {
+                windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+                val addedBtn = addOverlayButtonSafely()
+                val addedPanel = addOverlayPanelSafely()
+                if (!addedBtn || !addedPanel) {
+                    Toast.makeText(this, "悬浮窗添加失败，" + miuiTips(), Toast.LENGTH_LONG).show()
+                    broadcast("failed", "系统限制或窗口添加失败")
+                    stopForeground(STOP_FOREGROUND_REMOVE)
+                    stopSelf()
+                    return START_NOT_STICKY
+                } else {
+                    overlaysAdded = true
+                    broadcast("ready", null)
+                }
+            } catch (e: Exception) {
+                Log.e("OverlayService", "Exception adding overlays", e)
+                Toast.makeText(this, "悬浮窗异常：${e.message}", Toast.LENGTH_LONG).show()
+                broadcast("failed", e.javaClass.simpleName + ": " + (e.message ?: ""))
+                stopForeground(STOP_FOREGROUND_REMOVE)
+                stopSelf()
+                return START_NOT_STICKY
+            }
         }
+        return START_STICKY
     }
 
     override fun onDestroy() {
