@@ -10,12 +10,15 @@ import android.graphics.PixelFormat
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
+import android.provider.Settings
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.example.netprobeoverlay.R
 import com.example.netprobeoverlay.network.NetProbe
@@ -40,9 +43,22 @@ class OverlayService : Service() {
     override fun onCreate() {
         super.onCreate()
         startAsForeground()
+
+        if (!hasOverlayPermission()) {
+            Toast.makeText(this, getString(R.string.overlay_permission_rationale), Toast.LENGTH_LONG).show()
+            stopForeground(STOP_FOREGROUND_REMOVE)
+            stopSelf()
+            return
+        }
+
         windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        addOverlayButton()
-        addOverlayPanel()
+        val addedBtn = addOverlayButtonSafely()
+        val addedPanel = addOverlayPanelSafely()
+        if (!addedBtn || !addedPanel) {
+            // 添加失败（某些系统/ROM限制），安全退出
+            stopForeground(STOP_FOREGROUND_REMOVE)
+            stopSelf()
+        }
     }
 
     override fun onDestroy() {
@@ -51,6 +67,10 @@ class OverlayService : Service() {
         try { windowManager.removeView(overlayPanel) } catch (_: Exception) {}
         serviceJob.cancel()
     }
+
+    private fun hasOverlayPermission(): Boolean = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        Settings.canDrawOverlays(this)
+    } else true
 
     private fun startAsForeground() {
         val channelId = "netprobe_overlay"
@@ -87,68 +107,80 @@ class OverlayService : Service() {
         }
     }
 
-    private fun addOverlayButton() {
-        val inflater = LayoutInflater.from(this)
-        overlayButton = inflater.inflate(R.layout.overlay_button, null)
-        val params = commonLayoutParams()
-        windowManager.addView(overlayButton, params)
+    private fun addOverlayButtonSafely(): Boolean {
+        return try {
+            val inflater = LayoutInflater.from(this)
+            overlayButton = inflater.inflate(R.layout.overlay_button, null)
+            val params = commonLayoutParams()
+            windowManager.addView(overlayButton, params)
 
-        overlayButton.setOnTouchListener(object : View.OnTouchListener {
-            private var lastX = 0f
-            private var lastY = 0f
-            private var downX = 0f
-            private var downY = 0f
-            private var isDragging = false
+            overlayButton.setOnTouchListener(object : View.OnTouchListener {
+                private var lastX = 0f
+                private var lastY = 0f
+                private var downX = 0f
+                private var downY = 0f
+                private var isDragging = false
 
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                event ?: return false
-                val lp = overlayButton.layoutParams as WindowManager.LayoutParams
-                when (event.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        isDragging = false
-                        lastX = event.rawX
-                        lastY = event.rawY
-                        downX = lastX
-                        downY = lastY
-                        return true
-                    }
-                    MotionEvent.ACTION_MOVE -> {
-                        val dx = event.rawX - lastX
-                        val dy = event.rawY - lastY
-                        if (!isDragging && (kotlin.math.abs(event.rawX - downX) > 10 || kotlin.math.abs(event.rawY - downY) > 10)) {
-                            isDragging = true
-                        }
-                        if (isDragging) {
-                            lp.x += dx.toInt()
-                            lp.y += dy.toInt()
-                            windowManager.updateViewLayout(overlayButton, lp)
+                override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                    event ?: return false
+                    val lp = overlayButton.layoutParams as WindowManager.LayoutParams
+                    when (event.action) {
+                        MotionEvent.ACTION_DOWN -> {
+                            isDragging = false
                             lastX = event.rawX
                             lastY = event.rawY
+                            downX = lastX
+                            downY = lastY
+                            return true
                         }
-                        return true
-                    }
-                    MotionEvent.ACTION_UP -> {
-                        if (!isDragging) {
-                            // 点击行为：触发测试
-                            triggerTestAndShowPanel()
+                        MotionEvent.ACTION_MOVE -> {
+                            val dx = event.rawX - lastX
+                            val dy = event.rawY - lastY
+                            if (!isDragging && (kotlin.math.abs(event.rawX - downX) > 10 || kotlin.math.abs(event.rawY - downY) > 10)) {
+                                isDragging = true
+                            }
+                            if (isDragging) {
+                                lp.x += dx.toInt()
+                                lp.y += dy.toInt()
+                                windowManager.updateViewLayout(overlayButton, lp)
+                                lastX = event.rawX
+                                lastY = event.rawY
+                            }
+                            return true
                         }
-                        return true
+                        MotionEvent.ACTION_UP -> {
+                            if (!isDragging) {
+                                // 点击行为：触发测试
+                                triggerTestAndShowPanel()
+                            }
+                            return true
+                        }
                     }
+                    return false
                 }
-                return false
-            }
-        })
+            })
+            true
+        } catch (e: Exception) {
+            Log.e("OverlayService", "Failed to add overlay button", e)
+            false
+        }
     }
 
-    private fun addOverlayPanel() {
-        val inflater = LayoutInflater.from(this)
-        overlayPanel = inflater.inflate(R.layout.overlay_panel, null)
-        overlayPanel.visibility = View.GONE
-        val params = commonLayoutParams().apply {
-            y += 70 // 面板略微在按钮下方
-            flags = flags or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE // 不拦截触摸，完全透传
+    private fun addOverlayPanelSafely(): Boolean {
+        return try {
+            val inflater = LayoutInflater.from(this)
+            overlayPanel = inflater.inflate(R.layout.overlay_panel, null)
+            overlayPanel.visibility = View.GONE
+            val params = commonLayoutParams().apply {
+                y += 70 // 面板略微在按钮下方
+                flags = flags or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE // 不拦截触摸，完全透传
+            }
+            windowManager.addView(overlayPanel, params)
+            true
+        } catch (e: Exception) {
+            Log.e("OverlayService", "Failed to add overlay panel", e)
+            false
         }
-        windowManager.addView(overlayPanel, params)
     }
 
     private fun showPanelFor(ms: Long) {
