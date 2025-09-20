@@ -25,8 +25,9 @@ jobs:
       - name: Install required SDK packages
         shell: bash
         run: |
-          yes | sdkmanager --licenses
-          sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+          # 避免 yes | sdkmanager 在提前关闭管道时导致 pipefail 失败
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager --install "platform-tools" "platforms;android-34" "build-tools;34.0.0"
 
       - name: Install Gradle (for generating wrapper)
         shell: bash
