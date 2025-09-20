@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.netprobeoverlay.overlay.OverlayService
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +33,6 @@ class MainActivity : AppCompatActivity() {
             // Android 13+ 通知权限（前台服务通知）
             requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1001)
         }
-        startService(Intent(this, overlay.OverlayService::class.java))
+        startService(Intent(this, OverlayService::class.java))
     }
 }
