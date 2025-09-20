@@ -3,6 +3,7 @@ package com.example.netprobeoverlay.overlay
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -22,6 +23,7 @@ import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.example.netprobeoverlay.R
 import com.example.netprobeoverlay.network.NetProbe
+import com.example.netprobeoverlay.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -95,16 +97,27 @@ class OverlayService : Service() {
 
     private fun startAsForeground() {
         val channelId = "netprobe_overlay"
+        val nm = getSystemService(NotificationManager::class.java)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelId, "NetProbeOverlay", NotificationManager.IMPORTANCE_LOW)
-            val nm = getSystemService(NotificationManager::class.java)
+            // 提升重要级别，避免被 MIUI 静默隐藏
+            val channel = NotificationChannel(channelId, "NetProbeOverlay", NotificationManager.IMPORTANCE_HIGH)
+            channel.setShowBadge(true)
             nm.createNotificationChannel(channel)
         }
-        val notif: Notification = NotificationCompat.Builder(this, channelId)
+        val intent = Intent(this, MainActivity::class.java)
+        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0
+        val pi = PendingIntent.getActivity(this, 0, intent, flags)
+        val builder = NotificationCompat.Builder(this, channelId)
             .setContentTitle("NetProbe Overlay 运行中")
+            .setContentText("点击回到应用查看状态")
             .setSmallIcon(android.R.drawable.stat_sys_download)
+            .setContentIntent(pi)
             .setOngoing(true)
-            .build()
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+        if (Build.VERSION.SDK_INT >= 31) {
+            builder.setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
+        }
+        val notif: Notification = builder.build()
         startForeground(1, notif)
     }
 
