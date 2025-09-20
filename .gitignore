@@ -1,0 +1,22 @@
+# Gradle
+.gradle/
+build/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Android Studio
+.idea/
+*.iml
+local.properties
+.cxx/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keystores (please keep secrets local)
+*.jks
+*.keystore
+
+# APK outputs
+app/build/outputs/

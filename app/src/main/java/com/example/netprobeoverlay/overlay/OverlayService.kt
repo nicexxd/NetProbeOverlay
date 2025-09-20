@@ -1,0 +1,185 @@
+package com.example.netprobeoverlay.overlay
+
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.Service
+import android.content.Context
+import android.content.Intent
+import android.graphics.PixelFormat
+import android.os.Build
+import android.os.Handler
+import android.os.IBinder
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
+import android.view.WindowManager
+import android.widget.TextView
+import androidx.core.app.NotificationCompat
+import com.example.netprobeoverlay.R
+import com.example.netprobeoverlay.network.NetProbe
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
+class OverlayService : Service() {
+    private lateinit var windowManager: WindowManager
+    private lateinit var overlayButton: View
+    private lateinit var overlayPanel: View
+
+    private val serviceJob = Job()
+    private val scope = CoroutineScope(Dispatchers.Main + serviceJob)
+
+    private val handler = Handler(mainLooper)
+
+    override fun onBind(intent: Intent?): IBinder? = null
+
+    override fun onCreate() {
+        super.onCreate()
+        startAsForeground()
+        windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        addOverlayButton()
+        addOverlayPanel()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        try { windowManager.removeView(overlayButton) } catch (_: Exception) {}
+        try { windowManager.removeView(overlayPanel) } catch (_: Exception) {}
+        serviceJob.cancel()
+    }
+
+    private fun startAsForeground() {
+        val channelId = "netprobe_overlay"
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(channelId, "NetProbeOverlay", NotificationManager.IMPORTANCE_LOW)
+            val nm = getSystemService(NotificationManager::class.java)
+            nm.createNotificationChannel(channel)
+        }
+        val notif: Notification = NotificationCompat.Builder(this, channelId)
+            .setContentTitle("NetProbe Overlay 运行中")
+            .setSmallIcon(android.R.drawable.stat_sys_download)
+            .setOngoing(true)
+            .build()
+        startForeground(1, notif)
+    }
+
+    private fun commonLayoutParams(): WindowManager.LayoutParams {
+        val type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+        else
+            @Suppress("DEPRECATION") WindowManager.LayoutParams.TYPE_PHONE
+        return WindowManager.LayoutParams(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            type,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or // 不抢焦点，不影响其他区域触摸
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
+            PixelFormat.TRANSLUCENT
+        ).apply {
+            gravity = Gravity.TOP or Gravity.START
+            x = 50
+            y = 300
+        }
+    }
+
+    private fun addOverlayButton() {
+        val inflater = LayoutInflater.from(this)
+        overlayButton = inflater.inflate(R.layout.overlay_button, null)
+        val params = commonLayoutParams()
+        windowManager.addView(overlayButton, params)
+
+        overlayButton.setOnTouchListener(object : View.OnTouchListener {
+            private var lastX = 0f
+            private var lastY = 0f
+            private var downX = 0f
+            private var downY = 0f
+            private var isDragging = false
+
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                event ?: return false
+                val lp = overlayButton.layoutParams as WindowManager.LayoutParams
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        isDragging = false
+                        lastX = event.rawX
+                        lastY = event.rawY
+                        downX = lastX
+                        downY = lastY
+                        return true
+                    }
+                    MotionEvent.ACTION_MOVE -> {
+                        val dx = event.rawX - lastX
+                        val dy = event.rawY - lastY
+                        if (!isDragging && (kotlin.math.abs(event.rawX - downX) > 10 || kotlin.math.abs(event.rawY - downY) > 10)) {
+                            isDragging = true
+                        }
+                        if (isDragging) {
+                            lp.x += dx.toInt()
+                            lp.y += dy.toInt()
+                            windowManager.updateViewLayout(overlayButton, lp)
+                            lastX = event.rawX
+                            lastY = event.rawY
+                        }
+                        return true
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        if (!isDragging) {
+                            // 点击行为：触发测试
+                            triggerTestAndShowPanel()
+                        }
+                        return true
+                    }
+                }
+                return false
+            }
+        })
+    }
+
+    private fun addOverlayPanel() {
+        val inflater = LayoutInflater.from(this)
+        overlayPanel = inflater.inflate(R.layout.overlay_panel, null)
+        overlayPanel.visibility = View.GONE
+        val params = commonLayoutParams().apply {
+            y += 70 // 面板略微在按钮下方
+            flags = flags or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE // 不拦截触摸，完全透传
+        }
+        windowManager.addView(overlayPanel, params)
+    }
+
+    private fun showPanelFor(ms: Long) {
+        overlayPanel.visibility = View.VISIBLE
+        handler.removeCallbacksAndMessages(null)
+        handler.postDelayed({ overlayPanel.visibility = View.GONE }, ms)
+    }
+
+    private fun triggerTestAndShowPanel() {
+        val tvNode = overlayPanel.findViewById<TextView>(R.id.tvNode)
+        val tvAddr = overlayPanel.findViewById<TextView>(R.id.tvAddr)
+        val tvLatency = overlayPanel.findViewById<TextView>(R.id.tvLatency)
+        val tvBandwidth = overlayPanel.findViewById<TextView>(R.id.tvBandwidth)
+
+        tvNode.text = "节点：当前"
+        tvAddr.text = "地址：通过系统代理"
+        tvLatency.text = "延迟：测试中..."
+        tvBandwidth.text = "带宽：测试中..."
+
+        showPanelFor(5000)
+
+        scope.launch {
+            val latency = NetProbe.measureLatency()
+            withContext(Dispatchers.Main) {
+                tvLatency.text = if (latency >= 0) "延迟：${latency} ms" else "延迟：失败"
+            }
+
+            val bandwidth = NetProbe.measureBandwidth()
+            withContext(Dispatchers.Main) {
+                tvBandwidth.text = if (bandwidth >= 0) "带宽：${bandwidth} Mbps" else "带宽：失败"
+            }
+        }
+    }
+}

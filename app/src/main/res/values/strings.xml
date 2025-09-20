@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NetProbeOverlay</string>
+    <string name="overlay_permission_rationale">需要“在其他应用上层显示”权限以展示悬浮窗。</string>
+    <string name="start_overlay">启动悬浮窗</string>
+    <string name="stop_overlay">停止悬浮窗</string>
+</resources>
