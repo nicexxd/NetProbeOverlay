@@ -39,6 +39,11 @@ class MainActivity : AppCompatActivity() {
         val btn = Button(this).apply {
             text = getString(R.string.start_overlay)
             setOnClickListener { startOverlay() }
+            setOnLongClickListener {
+                // 长按仅测试通知常驻，不添加悬浮窗
+                startNotifyOnly()
+                true
+            }
             setPadding(40, 40, 40, 40)
         }
         setContentView(btn)
@@ -54,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                     val msg = intent.getStringExtra("msg") ?: ""
                     waitingForReady = false
                     if (status == "ready") {
-                        Toast.makeText(this@MainActivity, "悬浮窗已启动", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@MainActivity, if (msg.isNotEmpty()) msg else "悬浮窗已启动", Toast.LENGTH_LONG).show()
                     } else if (status == "failed") {
                         Toast.makeText(this@MainActivity, "悬浮窗启动失败：$msg", Toast.LENGTH_LONG).show()
                         showResolutionDialog("悬浮窗启动失败：$msg")
@@ -95,6 +100,31 @@ class MainActivity : AppCompatActivity() {
             return
         }
         maybeRequestPostNotifAndStart()
+    }
+
+    private fun startNotifyOnly() {
+        // 直接尝试启动仅通知模式，便于诊断“通知是否可见/前台服务是否能拉起”
+        val intent = Intent(this, OverlayService::class.java).apply {
+            putExtra(OverlayService.EXTRA_MODE, OverlayService.MODE_NOTIFY_ONLY)
+        }
+        try {
+            if (Build.VERSION.SDK_INT >= 26) {
+                ContextCompat.startForegroundService(this, intent)
+            } else {
+                startService(intent)
+            }
+            Toast.makeText(this, "仅通知测试：已尝试启动前台服务", Toast.LENGTH_SHORT).show()
+            waitingForReady = true
+            handler.postDelayed({
+                if (waitingForReady) {
+                    waitingForReady = false
+                    Toast.makeText(this, "未检测到通知，可能被系统限制或通知权限未开。", Toast.LENGTH_LONG).show()
+                    showResolutionDialog("未检测到通知，可能被系统限制或通知权限未开。")
+                }
+            }, 3000)
+        } catch (e: Exception) {
+            Toast.makeText(this, "仅通知测试启动失败：${e.message}", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun maybeRequestPostNotifAndStart() {
