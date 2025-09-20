@@ -49,12 +49,20 @@ class OverlayService : Service() {
         }
     }
 
+    private fun broadcast(status: String, msg: String? = null) {
+        val i = Intent("com.example.netprobeoverlay.OVERLAY_EVENT")
+        i.putExtra("status", status)
+        if (msg != null) i.putExtra("msg", msg)
+        try { sendBroadcast(i) } catch (_: Exception) {}
+    }
+
     override fun onCreate() {
         super.onCreate()
         startAsForeground()
 
         if (!hasOverlayPermission()) {
             Toast.makeText(this, getString(R.string.overlay_permission_rationale), Toast.LENGTH_LONG).show()
+            broadcast("failed", "缺少悬浮窗权限")
             stopForeground(STOP_FOREGROUND_REMOVE)
             stopSelf()
             return
@@ -66,8 +74,11 @@ class OverlayService : Service() {
         if (!addedBtn || !addedPanel) {
             // 添加失败（某些系统/ROM限制），安全退出
             Toast.makeText(this, "悬浮窗添加失败，" + miuiTips(), Toast.LENGTH_LONG).show()
+            broadcast("failed", "系统限制或窗口添加失败")
             stopForeground(STOP_FOREGROUND_REMOVE)
             stopSelf()
+        } else {
+            broadcast("ready", null)
         }
     }
 
@@ -174,6 +185,7 @@ class OverlayService : Service() {
         } catch (e: Exception) {
             Log.e("OverlayService", "Failed to add overlay button", e)
             Toast.makeText(this, "无法显示悬浮窗按钮，可能被系统限制。" + miuiTips(), Toast.LENGTH_LONG).show()
+            broadcast("failed", e.javaClass.simpleName + ": " + (e.message ?: ""))
             false
         }
     }
@@ -192,6 +204,7 @@ class OverlayService : Service() {
         } catch (e: Exception) {
             Log.e("OverlayService", "Failed to add overlay panel", e)
             Toast.makeText(this, "无法显示悬浮窗面板，可能被系统限制。" + miuiTips(), Toast.LENGTH_LONG).show()
+            broadcast("failed", e.javaClass.simpleName + ": " + (e.message ?: ""))
             false
         }
     }
