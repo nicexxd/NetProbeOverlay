@@ -284,8 +284,7 @@ class OverlayService : Service() {
         tvLatency.text = "延迟：测试中..."
         tvBandwidth.text = "上行带宽：测试中..."
  
--        showPanelFor(10_000)
-+        showPanelFor(15_000)
+        showPanelFor(15_000)
 
         scope.launch {
             val latency = NetProbe.measureLatency()

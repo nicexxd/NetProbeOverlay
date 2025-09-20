@@ -1,100 +1,270 @@
-09-21 00:40:12.174 I/GameBoosterService( 6273): onForegroundInfoChanged: Cur=com.miui.home       last=com.example.netprobeoverlay
-09-21 00:40:12.179 D/GameBoosterService( 6273): onGameStatusChange foreground:ForegroundInfo{mForegroundPackageName='com.miui.home', mForegroundUid=10133, mForegroundPid=4663, mLastForegroundPackageName='com.example.netprobeoverlay', mLastForegroundUid=10254, mLastForegroundPid=8517, mMultiWindowForegroundPackageName='com.miui.home', mMultiWindowForegroundUid=10133, mFlags=0}
-09-21 00:40:12.181 W/WindowManager( 2690): Failed to deliver inset state change to w=Window{4a08c8a u0 com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity EXITING}
-09-21 00:40:12.184 I/BeautyService( 6273): onForegroundInfoChanged: Cur=com.miui.home    last=com.example.netprobeoverlay
-09-21 00:40:12.193 W/WindowManager( 2690): Exception thrown during dispatchAppVisibility Window{4a08c8a u0 com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity EXITING}
-09-21 00:40:12.228 E/ActivityManagerWrapper( 4663): getRecentTasks: mainTaskId=1068   userId=0   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} }
-09-21 00:40:12.254 E/ActivityManagerWrapper( 4663): getRecentTasks: mainTaskId=1068   userId=0   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} }
-09-21 00:40:12.272 I/ThirdAppAssistant( 6944): ExceptionManager match exception type failed for com.example.netprobeoverlay
-09-21 00:40:12.593 W/ActivityTaskManager( 2690): Activity top resumed state loss timeout for ActivityRecord{6b1333b u0 com.example.netprobeoverlay/.MainActivity} t-1 f}}
-09-21 00:40:13.410 D/Launcher.CellLayout( 4663): touch item:ShortcutInfo, id=94, itemType=0, user=UserHandle{0}, mIconType=0, pkgName=com.example.netprobeoverlay, className=com.example.netprobeoverlay.MainActivity, screenId=1, container=-100, cellX=3, cellY=4, spanX=1, spanY=1
-09-21 00:40:13.466 I/ActivityTaskManager( 2690): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.example.netprobeoverlay/.MainActivity bnds=[839,1429][1011,1601] (has extras)} from uid 10133 from pid 4663 callingPackage com.miui.home
-09-21 00:40:13.467 D/AurogonImmobulusMode( 2690): launch app processName = com.example.netprobeoverlay uid = 10254
-09-21 00:40:13.469 D/MiGgameTypeIdentificationImpl( 2690): checkIfGameBeSupported app:com.example.netprobeoverlay
-09-21 00:40:13.469 I/WindowManager( 2690): When perf version exceed 2.3, MiGTStub result: false, gameType: 1, packageName: com.example.netprobeoverlay
-09-21 00:40:13.469 D/MiGgameTypeIdentificationImpl( 2690): checkIfGameBeSupported app:com.example.netprobeoverlay
-09-21 00:40:13.491 D/Boost   ( 2690): hostingType=next-top-activity, hostingName={com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity}, callerPackage=com.miui.home, isSystem=true, isBoostNeeded=false.
-09-21 00:40:13.492 I/ActivityManager( 2690): Start proc 8605:com.example.netprobeoverlay/u0a254 for next-top-activity {com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} caller=com.miui.home
-09-21 00:40:13.493 D/CoreBackPreview( 2690): Window{38b7902 u0 Splash Screen com.example.netprobeoverlay}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@5bc234e, mPriority=0}
-09-21 00:40:13.505 W/SQLiteLog( 6024): (28) double-quoted string literal: "com.example.netprobeoverlay"
-09-21 00:40:13.510 I/SmartPower.com.example.netprobeoverlay/10254(0)( 2690): died->visible(1363ms) R(become visible) adj=-10000.
-09-21 00:40:13.512 I/SmartPower( 2690): com.example.netprobeoverlay/10254 state=died adj=0 proc size=1 move to foreground become visible
-09-21 00:40:13.524 E/ActivityManagerWrapper( 4663): getRecentTasks: mainTaskId=1069   userId=0   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} }
-09-21 00:40:13.529 W/RecentsModel( 4663): getRunningTask   taskInfo=TaskInfo{userId=0 taskId=1069 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.example.netprobeoverlay/.MainActivity } baseActivity=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} topActivity=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} origActivity=null realActivity=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} numActivities=1 lastActiveTime=177558549 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=200 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@b239ff8} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=0 displayCutoutSafeInsets=Rect(0, 87 - 0, 0) topActivityInfo=ActivityInfo{ab8dcd1 com.example.netprobeoverlay.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=true isSleeping=false topActivityInSizeCompat=false topActivityInMiuiSizeCompat=false topActivityEligibleForLetterboxEducation= false locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden mIsCastMode=false}
-09-21 00:40:13.529 W/RecentsModel( 4663): getTaskInfoIgnoreHomeAndFreeform   taskInfo=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity}
-09-21 00:40:13.533 E/ActivityManagerWrapper( 4663): getRecentTasks: mainTaskId=1069   userId=0   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} }
-09-21 00:40:13.552 D/AppObserver( 4663): ForegroundInfo{mForegroundPackageName='com.example.netprobeoverlay', mForegroundUid=10254, mForegroundPid=8605, mLastForegroundPackageName='com.miui.home', mLastForegroundUid=10133, mLastForegroundPid=4663, mMultiWindowForegroundPackageName='com.example.netprobeoverlay', mMultiWindowForegroundUid=10254, mFlags=1}
-09-21 00:40:13.552 D/PerfEngineController( 7724): ForegroundInfo{mForegroundPackageName='com.example.netprobeoverlay', mForegroundUid=10254, mForegroundPid=8605, mLastForegroundPackageName='com.miui.home', mLastForegroundUid=10133, mLastForegroundPid=4663, mMultiWindowForegroundPackageName='com.example.netprobeoverlay', mMultiWindowForegroundUid=10254, mFlags=1}
-09-21 00:40:13.553 I/GST     ( 7876): forePkg: com.example.netprobeoverlay, preForePkg: com.miui.home
-09-21 00:40:13.553 I/ProcessMonitor( 6273): onForegroundInfoChanged: ForegroundInfo{mForegroundPackageName='com.example.netprobeoverlay', mForegroundUid=10254, mForegroundPid=8605, mLastForegroundPackageName='com.miui.home', mLastForegroundUid=10133, mLastForegroundPid=4663, mMultiWindowForegroundPackageName='com.example.netprobeoverlay', mMultiWindowForegroundUid=10254, mFlags=1}
-09-21 00:40:13.554 I/GameBoosterService( 6273): onForegroundInfoChanged: Cur=com.example.netprobeoverlay         last=com.miui.home
-09-21 00:40:13.554 D/GameBoosterService( 6273): onGameStatusChange foreground:ForegroundInfo{mForegroundPackageName='com.example.netprobeoverlay', mForegroundUid=10254, mForegroundPid=8605, mLastForegroundPackageName='com.miui.home', mLastForegroundUid=10133, mLastForegroundPid=4663, mMultiWindowForegroundPackageName='com.example.netprobeoverlay', mMultiWindowForegroundUid=10254, mFlags=1}
-09-21 00:40:13.555 E/SuggestManager( 6273): openApp name = com.example.netprobeoverlay
-09-21 00:40:13.555 D/LS-ForegroundStatusManager( 7724): handleMessage ForegroundInfoChanged. pkg = com.example.netprobeoverlay, uid = 10254, mCurrentForegroundUid = 10133
-09-21 00:40:13.559 W/MQSService( 5905): CallerName:com.example.netprobeoverlay,calling Uid:10254
-09-21 00:40:13.559 D/MQSService( 5905): registerApplicationScoutThread pid = 8605, packageName = com.example.netprobeoverlay
-09-21 00:40:13.567 I/BeautyService( 6273): onForegroundInfoChanged: Cur=com.example.netprobeoverlay      last=com.miui.home
-09-21 00:40:13.574 V/GraphicsEnvironment( 8605): ANGLE Developer option for 'com.example.netprobeoverlay' set to: 'default'
-09-21 00:40:13.574 V/GraphicsEnvironment( 8605): ANGLE GameManagerService for com.example.netprobeoverlay: false
-09-21 00:40:13.576 I/ForceDarkHelperStubImpl( 8605): initialize for com.example.netprobeoverlay , ForceDarkOrigin
-09-21 00:40:13.582 W/RecentsModel( 4663): getRunningTask   taskInfo=TaskInfo{userId=0 taskId=1069 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.example.netprobeoverlay/.MainActivity } baseActivity=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} topActivity=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} origActivity=null realActivity=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} numActivities=1 lastActiveTime=177558602 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=200 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@ea3e336} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=0 displayCutoutSafeInsets=Rect(0, 87 - 0, 0) topActivityInfo=ActivityInfo{cc66237 com.example.netprobeoverlay.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isSleeping=false topActivityInSizeCompat=false topActivityInMiuiSizeCompat=false topActivityEligibleForLetterboxEducation= false locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden mIsCastMode=false}
-09-21 00:40:13.582 W/RecentsModel( 4663): getTaskInfoIgnoreHomeAndFreeform   taskInfo=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity}
-09-21 00:40:13.591 E/ActivityManagerWrapper( 4663): getRecentTasks: mainTaskId=1069   userId=0   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} }
-09-21 00:40:13.599 W/RecentsModel( 4663): getRunningTask   taskInfo=TaskInfo{userId=0 taskId=1069 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.example.netprobeoverlay/.MainActivity } baseActivity=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} topActivity=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} origActivity=null realActivity=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} numActivities=1 lastActiveTime=177558619 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=200 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@442fcc2} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=0 displayCutoutSafeInsets=Rect(0, 87 - 0, 0) topActivityInfo=ActivityInfo{994ead3 com.example.netprobeoverlay.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isSleeping=false topActivityInSizeCompat=false topActivityInMiuiSizeCompat=false topActivityEligibleForLetterboxEducation= false locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden mIsCastMode=false}
-09-21 00:40:13.599 W/RecentsModel( 4663): getTaskInfoIgnoreHomeAndFreeform   taskInfo=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity}
-09-21 00:40:13.604 E/ActivityManagerWrapper( 4663): getRecentTasks: mainTaskId=1069   userId=0   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} }
-09-21 00:40:13.615 W/netprobeoverlay( 8605): type=1400 audit(0.0:32623): avc: denied { read } for name="u:object_r:vendor_displayfeature_prop:s0" dev="tmpfs" ino=388 scontext=u:r:untrusted_app:s0:c254,c256,c512,c768 tcontext=u:object_r:vendor_displayfeature_prop:s0 tclass=file permissive=0 app=com.example.netprobeoverlay
-09-21 00:40:13.662 D/CoreBackPreview( 2690): Window{7a8c847 u0 com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@b7ef19d, mPriority=0}
-09-21 00:40:13.666 D/RecentsImpl( 4663): mActivityStateObserver com.example.netprobeoverlay.MainActivity
-09-21 00:40:13.666 W/RecentsImpl( 4663): onResumed className=com.example.netprobeoverlay.MainActivity   mIsInAnotherPro=false   isKeyguardLocked=false   mSecuritySpaceGuideShown=false
-09-21 00:40:13.671 D/WindowManager( 2690): Input focus has changed to Window{7a8c847 u0 com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} display=0
-09-21 00:40:13.678 I/SurfaceFlinger( 1673): setTransactionState focusRequest transactionId:11553462189092 frontWin:7a8c847 com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity
-09-21 00:40:13.727 D/MiuiFreeFormGesturePointerEventListener( 2690): finishDrawingWindow: topFullScreenWindow= Window{7a8c847 u0 com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity}
-09-21 00:40:13.733 W/InputManager-JNI( 2690): Input channel object '38b7902 Splash Screen com.example.netprobeoverlay (client)' was disposed without first being removed with the input manager!
-09-21 00:40:13.740 I/ActivityTaskManager( 2690): Displayed com.example.netprobeoverlay/.MainActivity: +264ms
-09-21 00:40:13.742 D/CoreBackPreview( 2690): Window{38b7902 u0 Splash Screen com.example.netprobeoverlay EXITING}: Setting back callback null
-09-21 00:40:14.686 W/NotificationService( 2690): Toast already killed. pkg=com.example.netprobeoverlay token=android.os.BinderProxy@eecd572
-09-21 00:40:14.686 W/ToastPresenter( 4601): Error calling back com.example.netprobeoverlay to notify onToastHide()
-09-21 00:40:14.701 D/MIUIInput( 2690): [MotionEvent] publisher action=0x0, 34885788, channel '7a8c847 com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity (server)'
-09-21 00:40:14.705 D/MIUIInput( 8605): [MotionEvent] ViewRootImpl windowName 'com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity', { action=ACTION_DOWN, id[0]=0, pointerCount=1, eventTime=34885788, downTime=34885788, phoneEventTime=00:40:14.700 } moveCount:0
-09-21 00:40:14.756 I/DisplayFrameSetting( 7724): homeToAppEnd pkg=com.example.netprobeoverlay
-09-21 00:40:14.782 D/MIUIInput( 2690): [MotionEvent] publisher action=0x1, 34885870, channel '7a8c847 com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity (server)'
-09-21 00:40:14.783 D/MIUIInput( 8605): [MotionEvent] ViewRootImpl windowName 'com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity', { action=ACTION_UP, id[0]=0, pointerCount=1, eventTime=34885870, downTime=34885788, phoneEventTime=00:40:14.782 } moveCount:0
-09-21 00:40:14.793 E/AndroidRuntime( 8605): Process: com.example.netprobeoverlay, PID: 8605
-09-21 00:40:14.793 E/AndroidRuntime( 8605): java.lang.RuntimeException: Unable to create service com.example.netprobeoverlay.overlay.OverlayService: java.lang.NullPointerException: Attempt to invoke virtual method 'android.os.Looper android.content.Context.getMainLooper()' on a null object reference
-09-21 00:40:14.793 E/AndroidRuntime( 8605):     at com.example.netprobeoverlay.overlay.OverlayService.<init>(OverlayService.kt:46)
-09-21 00:40:14.791 W/netprobeoverlay( 8605): type=1400 audit(0.0:32624): avc: denied { search } for name="mqsas" dev="dm-42" ino=398 scontext=u:r:untrusted_app:s0:c254,c256,c512,c768 tcontext=u:object_r:mqsas_data_file:s0 tclass=dir permissive=0 app=com.example.netprobeoverlay
-09-21 00:40:14.791 W/netprobeoverlay( 8605): type=1400 audit(0.0:32625): avc: denied { search } for name="mqsas" dev="dm-42" ino=398 scontext=u:r:untrusted_app:s0:c254,c256,c512,c768 tcontext=u:object_r:mqsas_data_file:s0 tclass=dir permissive=0 app=com.example.netprobeoverlay
-09-21 00:40:14.791 W/netprobeoverlay( 8605): type=1400 audit(0.0:32626): avc: denied { search } for name="mqsas" dev="dm-42" ino=398 scontext=u:r:untrusted_app:s0:c254,c256,c512,c768 tcontext=u:object_r:mqsas_data_file:s0 tclass=dir permissive=0 app=com.example.netprobeoverlay
-09-21 00:40:14.791 W/netprobeoverlay( 8605): type=1400 audit(0.0:32627): avc: denied { search } for name="mqsas" dev="dm-42" ino=398 scontext=u:r:untrusted_app:s0:c254,c256,c512,c768 tcontext=u:object_r:mqsas_data_file:s0 tclass=dir permissive=0 app=com.example.netprobeoverlay
-09-21 00:40:14.791 W/netprobeoverlay( 8605): type=1400 audit(0.0:32628): avc: denied { getattr } for path="/data/mqsas" dev="dm-42" ino=398 scontext=u:r:untrusted_app:s0:c254,c256,c512,c768 tcontext=u:object_r:mqsas_data_file:s0 tclass=dir permissive=0 app=com.example.netprobeoverlay
-09-21 00:40:14.791 W/netprobeoverlay( 8605): type=1400 audit(0.0:32629): avc: denied { search } for name="mqsas" dev="dm-42" ino=398 scontext=u:r:untrusted_app:s0:c254,c256,c512,c768 tcontext=u:object_r:mqsas_data_file:s0 tclass=dir permissive=0 app=com.example.netprobeoverlay
-09-21 00:40:14.799 D/DigestGenerator( 5905): digest=============com.example.netprobeoverlayjava.lang.RuntimeException: Unable to create service com.example.netprobeoverlay.overlay.OverlayService: java.lang.NullPointerException: Attempt to invoke virtual method 'android.os.Looper android.content.Context.getMainLooper()' on a null object reference
-09-21 00:40:14.799 D/DigestGenerator( 5905): at com.example.netprobeoverlay.overlay.OverlayService.<init>(OverlayService.kt:XX)
-09-21 00:40:14.801 D/MQSEventManager( 5905): send MSG_JUDGE_TRANSMISSION packageName com.example.netprobeoverlay
-09-21 00:40:14.801 W/JavaExceptionHandler( 5905): Too noisy! skip duplicate java exception report:com.example.netprobeoverlay now=1758386414801 mLastReportTime=1758386364961 interval=60000
-09-21 00:40:14.801 W/MQSEventManager( 5905): Too noisy! Bail the event:com.example.netprobeoverlay type:1
-09-21 00:40:14.803 W/ActivityTaskManager( 2690):   Force finishing activity com.example.netprobeoverlay/.MainActivity
-09-21 00:40:14.859 I/WindowManager( 2690): WIN DEATH: Window{7a8c847 u0 com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity}
-09-21 00:40:14.859 W/InputManager-JNI( 2690): Input channel object '7a8c847 com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity (client)' was disposed without first being removed with the input manager!
-09-21 00:40:14.859 I/SmartPower.com.example.netprobeoverlay/10254(8605)( 2690): visible->died(1349ms) R(process died ) adj=0.
-09-21 00:40:14.860 I/ActivityManager( 2690): Process com.example.netprobeoverlay (pid 8605) has died: fg  TOP
-09-21 00:40:14.861 I/AutoStartManagerService( 2690): MIUILOG- Reject RestartService service :ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.overlay.OverlayService} uid : 10254
-09-21 00:40:14.862 W/ActivityManager( 2690): Bringing down service while still waiting for start foreground: ServiceRecord{eaed6be u0 com.example.netprobeoverlay/.overlay.OverlayService}
-09-21 00:40:14.862 I/SmartPower( 2690): com.example.netprobeoverlay/10254 state=foreground adj=0 proc size=1 move to died process died
-09-21 00:40:14.882 W/WindowManager( 2690): Failed to deliver inset state change to w=Window{7a8c847 u0 com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity EXITING}
-09-21 00:40:14.883 D/AppObserver( 4663): ForegroundInfo{mForegroundPackageName='com.miui.home', mForegroundUid=10133, mForegroundPid=4663, mLastForegroundPackageName='com.example.netprobeoverlay', mLastForegroundUid=10254, mLastForegroundPid=8605, mMultiWindowForegroundPackageName='com.miui.home', mMultiWindowForegroundUid=10133, mFlags=0}
-09-21 00:40:14.884 I/ProcessMonitor( 6273): onForegroundInfoChanged: ForegroundInfo{mForegroundPackageName='com.miui.home', mForegroundUid=10133, mForegroundPid=4663, mLastForegroundPackageName='com.example.netprobeoverlay', mLastForegroundUid=10254, mLastForegroundPid=8605, mMultiWindowForegroundPackageName='com.miui.home', mMultiWindowForegroundUid=10133, mFlags=0}
-09-21 00:40:14.885 I/GameBoosterService( 6273): onForegroundInfoChanged: Cur=com.miui.home       last=com.example.netprobeoverlay
-09-21 00:40:14.885 D/GameBoosterService( 6273): onGameStatusChange foreground:ForegroundInfo{mForegroundPackageName='com.miui.home', mForegroundUid=10133, mForegroundPid=4663, mLastForegroundPackageName='com.example.netprobeoverlay', mLastForegroundUid=10254, mLastForegroundPid=8605, mMultiWindowForegroundPackageName='com.miui.home', mMultiWindowForegroundUid=10133, mFlags=0}
-09-21 00:40:14.885 D/PerfEngineController( 7724): ForegroundInfo{mForegroundPackageName='com.miui.home', mForegroundUid=10133, mForegroundPid=4663, mLastForegroundPackageName='com.example.netprobeoverlay', mLastForegroundUid=10254, mLastForegroundPid=8605, mMultiWindowForegroundPackageName='com.miui.home', mMultiWindowForegroundUid=10133, mFlags=0}
-09-21 00:40:14.886 I/GST     ( 7876): forePkg: com.miui.home, preForePkg: com.example.netprobeoverlay
-09-21 00:40:14.887 I/BeautyService( 6273): onForegroundInfoChanged: Cur=com.miui.home    last=com.example.netprobeoverlay
-09-21 00:40:14.888 I/ThermalInfoCollector( 7724): collectForgroundAppsInfo: com.example.netprobeoverlay
-09-21 00:40:14.893 W/WindowManager( 2690): Exception thrown during dispatchAppVisibility Window{7a8c847 u0 com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity EXITING}
-09-21 00:40:14.931 E/ActivityManagerWrapper( 4663): getRecentTasks: mainTaskId=1069   userId=0   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} }
-09-21 00:40:14.950 I/ThirdAppAssistant( 6944): ExceptionManager match exception type failed for com.example.netprobeoverlay
-09-21 00:40:14.963 E/ActivityManagerWrapper( 4663): getRecentTasks: mainTaskId=1069   userId=0   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.example.netprobeoverlay/com.example.netprobeoverlay.MainActivity} }
-09-21 00:40:15.304 W/ActivityTaskManager( 2690): Activity top resumed state loss timeout for ActivityRecord{1d9294c u0 com.example.netprobeoverlay/.MainActivity} t-1 f}}
-09-21 00:40:17.386 W/NotificationService( 2690): Toast already killed. pkg=com.example.netprobeoverlay token=android.os.BinderProxy@b002300
-09-21 00:40:17.387 W/ToastPresenter( 4601): Error calling back com.example.netprobeoverlay to notify onToastHide()
+运行 gradle ：app：assembleDebug --stacktrace
+
+欢迎使用 Gradle 8.7！
+
+以下是此版本的亮点：
+- 使用 Java 22 进行编译和测试
+- 可缓存的 Groovy 脚本编译
+- 惰性集合属性中的新方法
+
+有关更多详细信息，请参阅https://docs.gradle.org/8.7/release-notes.html
+
+启动 Gradle 守护进程（后续构建会更快）
+
+> 配置项目：
+构建配置为优先选择设置存储库而不是项目存储库，但存储库“Google”是由构建文件“build.gradle”添加的
+构建配置为优先使用设置存储库而不是项目存储库，但存储库“MavenRepo”是由构建文件“build.gradle”添加的
+构建配置为优先选择设置存储库而不是项目存储库，但存储库“Google”是由构建文件“build.gradle”添加的
+构建配置为优先使用设置存储库而不是项目存储库，但存储库“MavenRepo”是由构建文件“build.gradle”添加的
+
+> 任务 ：app：preBuild 最新
+> 任务：app：preDebugBuild UP-TO-DATE
+> 任务：app：mergeDebugNativeDebugMetadata NO-SOURCE
+> 任务：app：checkKotlinGradlePluginConfigurationErrors
+> 任务：app：checkDebugAarMetadata
+> 任务：app：generateDebugResValues
+> 任务：app：mapDebugSourceSetPaths
+> 任务：app：generateDebugResources
+> 任务：app：packageDebugResources
+> 任务：app：mergeDebugResources
+> 任务：app：createDebugCompatibleScreenManifests
+> 任务：app：extractDeepLinksDebug
+> 任务：app：parseDebugLocalResources
+
+> 任务：app：processDebugMainManifest
+package=“com.example.netprobeoverlay”，位于源AndroidManifest.xml：/home/runner/work/NetProbeOverlay/NetProbeOverlay/app/src/main/AndroidManifest.xml。
+不再支持通过源AndroidManifest.xml中的 package 属性设置命名空间，并且该值将被忽略。
+建议：从源AndroidManifest.xml/home/runner/work/NetProbeOverlay/NetProbeOverlay/app/src/main/AndroidManifest.xml中删除 package=“com.example.netprobeoverlay”。
+
+> 任务：app：processDebugManifest
+> 任务：app：processDebugManifestForPackage
+> 任务：app：javaPreCompileDebug
+> 任务 ：app：mergeDebugShaders
+> 任务 ：app：compileDebugShaders NO-SOURCE
+> 任务：app：generateDebugAssets 最新
+> 任务：app：mergeDebugAssets
+> 任务：app：compressDebugAssets
+> 任务：app：desugarDebugFileDependencies
+> 任务：app：processDebugResources
+> 任务：app：checkDebugDuplicateClasses
+> 任务：app：mergeDebugStartupProfile
+
+> 任务：app：compileDebugKotlin
+e：file:///home/runner/work/NetProbeOverlay/NetProbeOverlay/app/src/main/java/com/example/netprobeoverlay/overlay/OverlayService.kt:287:1 未解析的参考资料。由于接收器类型不匹配，以下候选项均不适用：
+公共内联运算符乐趣 BigDecimal.unaryMinus（）：用 kotlin 定义的 BigDecimal
+公共内联运算符 fun BigInteger.unaryMinus（）：用 kotlin 定义的 BigInteger
+e：file:///home/runner/work/NetProbeOverlay/NetProbeOverlay/app/src/main/java/com/example/netprobeoverlay/overlay/OverlayService.kt:288:1 未解析的参考文献：+
+
+> 任务 ：app：compileDebugKotlin 失败
+> 任务：app：mergeExtDexDebug
+
+FAILURE：构建失败，出现异常。
+
+* 出了什么问题：
+任务“：app：compileDebugKotlin”的执行失败。
+> 执行 org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction 时发生故障
+> 编译错误。有关更多详细信息，请参阅日志
+
+*尝试：
+> 使用 --info 或 --debug 选项运行以获得更多日志输出。
+> 使用 --scan 运行以获得完整的见解。
+> 在以下位置获取更多帮助https://help.gradle.org。
+
+* 例外情况是：
+org.gradle.api.tasks.TaskExecutionException：任务“：app：compileDebugKotlin”的执行失败。
+在 org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.lambda$executeIfValid$1（ExecuteActionsTaskExecuter.java：130）
+在 org.gradle.internal.Try$Failure.ifSuccessfulOrElse（Try.java：282）
+在 org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid（ExecuteActionsTaskExecuter.java：128）
+在 org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute（ExecuteActionsTaskExecuter.java：116）
+在 org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute（FinalizePropertiesTaskExecuter.java：46）
+在 org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute（ResolveTaskExecutionModeExecuter.java：51）
+在 org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute（SkipTaskWithNoActionsExecuter.java：57）
+在 org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute（SkipOnlyIfTaskExecuter.java：74）
+在 org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute（CatchExceptionTaskExecuter.java：36）
+在 org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask（EventFiringTaskExecuter.java：77）
+在 org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call（EventFiringTaskExecuter.java：55）
+在 org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call（EventFiringTaskExecuter.java：52）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute（DefaultBuildOperationRunner.java：200）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute（DefaultBuildOperationRunner.java：195）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute（DefaultBuildOperationRunner.java：66）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute（DefaultBuildOperationRunner.java：59）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner.execute（DefaultBuildOperationRunner.java：157）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner.execute（DefaultBuildOperationRunner.java：59）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner.call（DefaultBuildOperationRunner.java：53）
+在 org.gradle.internal.operations.DefaultBuildOperationExecutor.call（DefaultBuildOperationExecutor.java：73）
+在 org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute（EventFiringTaskExecuter.java：52）
+在 org.gradle.execution.plan.LocalTaskNodeExecutor.execute（LocalTaskNodeExecutor.java：42）
+在 org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute（DefaultTaskExecutionGraph.java：331）
+在 org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute（DefaultTaskExecutionGraph.java：318）
+在 org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0（DefaultTaskExecutionGraph.java：314）
+在 org.gradle.internal.operations.CurrentBuildOperationRef.with（CurrentBuildOperationRef.java：80）
+在 org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute（DefaultTaskExecutionGraph.java：314）
+在 org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute（DefaultTaskExecutionGraph.java：303）
+在 org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute（DefaultPlanExecutor.java：463）
+在 org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run（DefaultPlanExecutor.java：380）
+在 org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute（ExecutorPolicy.java：64）
+在 org.gradle.internal.concurrent.AbstractManagedExecutor$1.run（AbstractManagedExecutor.java：47）
+原因：org.gradle.workers.internal.DefaultWorkerExecutor$WorkExecutionException：执行 org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction 时发生故障
+在 org.gradle.workers.internal.DefaultWorkerExecutor$WorkItemExecution.waitForCompletion（DefaultWorkerExecutor.java：287）
+在 org.gradle.internal.work.DefaultAsyncWorkTracker.lambda$waitForItemsAndGatherFailures$2（DefaultAsyncWorkTracker.java：130）
+在 org.gradle.internal.Factories$1.create（Factories.java：31）
+在 org.gradle.internal.work.DefaultWorkerLeaseService.withoutLocks（DefaultWorkerLeaseService.java：336）
+在 org.gradle.internal.work.DefaultWorkerLeaseService.withoutLocks（DefaultWorkerLeaseService.java：319）
+在 org.gradle.internal.work.DefaultWorkerLeaseService.withoutLock（DefaultWorkerLeaseService.java：324）
+在 org.gradle.internal.work.DefaultAsyncWorkTracker.waitForItemsAndGatherFailures（DefaultAsyncWorkTracker.java：126）
+在 org.gradle.internal.work.DefaultAsyncWorkTracker.waitForItemsAndGatherFailures（DefaultAsyncWorkTracker.java：92）
+在 org.gradle.internal.work.DefaultAsyncWorkTracker.waitForAll（DefaultAsyncWorkTracker.java：78）
+在 org.gradle.internal.work.DefaultAsyncWorkTracker.waitForCompletion（DefaultAsyncWorkTracker.java：66）
+在 org.gradle.api.internal.tasks.execution.TaskExecution$3.run（TaskExecution.java：252）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute（DefaultBuildOperationRunner.java：29）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute（DefaultBuildOperationRunner.java：26）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute（DefaultBuildOperationRunner.java：66）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute（DefaultBuildOperationRunner.java：59）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner.execute（DefaultBuildOperationRunner.java：157）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner.execute（DefaultBuildOperationRunner.java：59）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner.run（DefaultBuildOperationRunner.java：47）
+在 org.gradle.internal.operations.DefaultBuildOperationExecutor.run（DefaultBuildOperationExecutor.java：68）
+在 org.gradle.api.internal.tasks.execution.TaskExecution.executeAction（TaskExecution.java：229）
+在 org.gradle.api.internal.tasks.execution.TaskExecution.executeActions（TaskExecution.java：212）
+在 org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles（TaskExecution.java：195）
+在 org.gradle.api.internal.tasks.execution.TaskExecution.execute（TaskExecution.java：162）
+在 org.gradle.internal.execution.steps.ExecuteStep.executeInternal（ExecuteStep.java：105）
+在 org.gradle.internal.execution.steps.ExecuteStep.access$000（ExecuteStep.java：44）
+在 org.gradle.internal.execution.steps.ExecuteStep$1.call（ExecuteStep.java：59）
+在 org.gradle.internal.execution.steps.ExecuteStep$1.call（ExecuteStep.java：56）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute（DefaultBuildOperationRunner.java：200）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute（DefaultBuildOperationRunner.java：195）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute（DefaultBuildOperationRunner.java：66）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute（DefaultBuildOperationRunner.java：59）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner.execute（DefaultBuildOperationRunner.java：157）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner.execute（DefaultBuildOperationRunner.java：59）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner.call（DefaultBuildOperationRunner.java：53）
+在 org.gradle.internal.operations.DefaultBuildOperationExecutor.call（DefaultBuildOperationExecutor.java：73）
+在 org.gradle.internal.execution.steps.ExecuteStep.execute（ExecuteStep.java：56）
+在 org.gradle.internal.execution.steps.ExecuteStep.execute（ExecuteStep.java：44）
+在 org.gradle.internal.execution.steps.CancelExecutionStep.execute（CancelExecutionStep.java：41）
+在 org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout（TimeoutStep.java：74）
+在 org.gradle.internal.execution.steps.TimeoutStep.execute（TimeoutStep.java：55）
+在 org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute（PreCreateOutputParentsStep.java：50）
+在 org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute（PreCreateOutputParentsStep.java：28）
+在 org.gradle.internal.execution.steps.RemovePreviousOutputsStep.execute（RemovePreviousOutputsStep.java：67）
+在 org.gradle.internal.execution.steps.RemovePreviousOutputsStep.execute（RemovePreviousOutputsStep.java：37）
+在 org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute（BroadcastChangingOutputsStep.java：61）
+在 org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute（BroadcastChangingOutputsStep.java：26）
+在 org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute（CaptureOutputsAfterExecutionStep.java：67）
+在 org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute（CaptureOutputsAfterExecutionStep.java：45）
+在 org.gradle.internal.execution.steps.ResolveInputChangesStep.execute（ResolveInputChangesStep.java：40）
+在 org.gradle.internal.execution.steps.ResolveInputChangesStep.execute（ResolveInputChangesStep.java：29）
+在 org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache（BuildCacheStep.java：189）
+在 org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$1（BuildCacheStep.java：75）
+在 org.gradle.internal.Either$Right.fold（Either.java：175）
+在 org.gradle.internal.execution.caching.CachingState.fold（CachingState.java：62）
+在 org.gradle.internal.execution.steps.BuildCacheStep.execute（BuildCacheStep.java：73）
+在 org.gradle.internal.execution.steps.BuildCacheStep.execute（BuildCacheStep.java：48）
+在 org.gradle.internal.execution.steps.StoreExecutionStateStep.execute（StoreExecutionStateStep.java：46）
+在 org.gradle.internal.execution.steps.StoreExecutionStateStep.execute（StoreExecutionStateStep.java：35）
+在 org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause（SkipUpToDateStep.java：76）
+在 org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2（SkipUpToDateStep.java：54）
+在 org.gradle.internal.execution.steps.SkipUpToDateStep.execute（SkipUpToDateStep.java：54）
+在 org.gradle.internal.execution.steps.SkipUpToDateStep.execute（SkipUpToDateStep.java：36）
+在 org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute（MarkSnapshottingInputsFinishedStep.java：37）
+在 org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute（MarkSnapshottingInputsFinishedStep.java：27）
+在 org.gradle.internal.execution.steps.ResolveIncrementalCachingStateStep.executeDelegate（ResolveIncrementalCachingStateStep.java：49）
+在 org.gradle.internal.execution.steps.ResolveIncrementalCachingStateStep.executeDelegate（ResolveIncrementalCachingStateStep.java：27）
+在 org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute（AbstractResolveCachingStateStep.java：71）
+在 org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute（AbstractResolveCachingStateStep.java：39）
+在 org.gradle.internal.execution.steps.ResolveChangesStep.execute（ResolveChangesStep.java：65）
+在 org.gradle.internal.execution.steps.ResolveChangesStep.execute（ResolveChangesStep.java：36）
+在 org.gradle.internal.execution.steps.ValidateStep.execute（ValidateStep.java：106）
+在 org.gradle.internal.execution.steps.ValidateStep.execute（ValidateStep.java：55）
+在 org.gradle.internal.execution.steps.AbstractCaptureStateBeforeExecutionStep.execute（AbstractCaptureStateBeforeExecutionStep.java：64）
+在 org.gradle.internal.execution.steps.AbstractCaptureStateBeforeExecutionStep.execute（AbstractCaptureStateBeforeExecutionStep.java：43）
+在 org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.executeWithNonEmptySources（AbstractSkipEmptyWorkStep.java：125）
+在 org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.execute（AbstractSkipEmptyWorkStep.java：61）
+在 org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.execute（AbstractSkipEmptyWorkStep.java：36）
+在 org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute（MarkSnapshottingInputsStartedStep.java：38）
+在 org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.execute（LoadPreviousExecutionStateStep.java：36）
+在 org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.execute（LoadPreviousExecutionStateStep.java：23）
+在 org.gradle.internal.execution.steps.HandleStaleOutputsStep.execute（HandleStaleOutputsStep.java：75）
+在 org.gradle.internal.execution.steps.HandleStaleOutputsStep.execute（HandleStaleOutputsStep.java：41）
+在 org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.lambda$execute$0（AssignMutableWorkspaceStep.java：35）
+在 org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace（TaskExecution.java：289）
+在 org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.execute（AssignMutableWorkspaceStep.java：31）
+在 org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.execute（AssignMutableWorkspaceStep.java：22）
+在 org.gradle.internal.execution.steps.ChoosePipelineStep.execute（ChoosePipelineStep.java：40）
+在 org.gradle.internal.execution.steps.ChoosePipelineStep.execute（ChoosePipelineStep.java：23）
+在 org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.lambda$execute$2（ExecuteWorkBuildOperationFiringStep.java：67）
+在 org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute（ExecuteWorkBuildOperationFiringStep.java：67）
+在 org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute（ExecuteWorkBuildOperationFiringStep.java：39）
+在 org.gradle.internal.execution.steps.IdentityCacheStep.execute（IdentityCacheStep.java：46）
+在 org.gradle.internal.execution.steps.IdentityCacheStep.execute（IdentityCacheStep.java：34）
+在 org.gradle.internal.execution.steps.IdentifyStep.execute（IdentifyStep.java：48）
+在 org.gradle.internal.execution.steps.IdentifyStep.execute（IdentifyStep.java：35）
+在 org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute（DefaultExecutionEngine.java：61）
+在 org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid（ExecuteActionsTaskExecuter.java：127）
+在 org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute（ExecuteActionsTaskExecuter.java：116）
+在 org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute（FinalizePropertiesTaskExecuter.java：46）
+在 org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute（ResolveTaskExecutionModeExecuter.java：51）
+在 org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute（SkipTaskWithNoActionsExecuter.java：57）
+在 org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute（SkipOnlyIfTaskExecuter.java：74）
+在 org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute（CatchExceptionTaskExecuter.java：36）
+在 org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask（EventFiringTaskExecuter.java：77）
+在 org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call（EventFiringTaskExecuter.java：55）
+在 org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call（EventFiringTaskExecuter.java：52）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute（DefaultBuildOperationRunner.java：200）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute（DefaultBuildOperationRunner.java：195）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute（DefaultBuildOperationRunner.java：66）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute（DefaultBuildOperationRunner.java：59）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner.execute（DefaultBuildOperationRunner.java：157）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner.execute（DefaultBuildOperationRunner.java：59）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner.call（DefaultBuildOperationRunner.java：53）
+在 org.gradle.internal.operations.DefaultBuildOperationExecutor.call（DefaultBuildOperationExecutor.java：73）
+在 org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute（EventFiringTaskExecuter.java：52）
+在 org.gradle.execution.plan.LocalTaskNodeExecutor.execute（LocalTaskNodeExecutor.java：42）
+在 org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute（DefaultTaskExecutionGraph.java：331）
+在 org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute（DefaultTaskExecutionGraph.java：318）
+在 org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0（DefaultTaskExecutionGraph.java：314）
+在 org.gradle.internal.operations.CurrentBuildOperationRef.with（CurrentBuildOperationRef.java：80）
+在 org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute（DefaultTaskExecutionGraph.java：314）
+在 org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute（DefaultTaskExecutionGraph.java：303）
+在 org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute（DefaultPlanExecutor.java：463）
+在 org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run（DefaultPlanExecutor.java：380）
+在 org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute（ExecutorPolicy.java：64）
+在 org.gradle.internal.concurrent.AbstractManagedExecutor$1.run（AbstractManagedExecutor.java：47）
+原因：org.jetbrains.kotlin.gradle.tasks.CompilationErrorException： Compilation error。有关更多详细信息，请参阅日志
+位于 org.jetbrains.kotlin.gradle.tasks.TasksUtilsKt.throwExceptionIfCompilationFailed（tasksUtils.kt：20）
+位于 org.jetbrains.kotlin.compilerRunner.GradleKotlinCompilerWork.run（GradleKotlinCompilerWork.kt：141）
+位于 org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction.execute（GradleCompilerRunnerWithWorkers.kt：73）
+在 org.gradle.workers.internal.DefaultWorkerServer.execute（DefaultWorkerServer.java：63）
+在 org.gradle.workers.internal.NoIsolationWorkerFactory$1$1.create（NoIsolationWorkerFactory.java：66）
+在 org.gradle.workers.internal.NoIsolationWorkerFactory$1$1.create（NoIsolationWorkerFactory.java：62）
+在 org.gradle.internal.classloader.ClassLoaderUtils.executeInClassloader（ClassLoaderUtils.java：100）
+在 org.gradle.workers.internal.NoIsolationWorkerFactory$1.lambda$execute$0（NoIsolationWorkerFactory.java：62）
+在 org.gradle.workers.internal.AbstractWorker$1.call（AbstractWorker.java：44）
+在 org.gradle.workers.internal.AbstractWorker$1.call（AbstractWorker.java：41）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute（DefaultBuildOperationRunner.java：200）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute（DefaultBuildOperationRunner.java：195）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute（DefaultBuildOperationRunner.java：66）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute（DefaultBuildOperationRunner.java：59）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner.execute（DefaultBuildOperationRunner.java：157）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner.execute（DefaultBuildOperationRunner.java：59）
+在 org.gradle.internal.operations.DefaultBuildOperationRunner.call（DefaultBuildOperationRunner.java：53）
+在 org.gradle.internal.operations.DefaultBuildOperationExecutor.call（DefaultBuildOperationExecutor.java：73）
+在 org.gradle.workers.internal.AbstractWorker.executeWrappedInBuildOperation（AbstractWorker.java：41）
+在 org.gradle.workers.internal.NoIsolationWorkerFactory$1.execute（NoIsolationWorkerFactory.java：59）
+在 org.gradle.workers.internal.DefaultWorkerExecutor.lambda$submitWork$0（DefaultWorkerExecutor.java：174）
+在 org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.runExecution（DefaultConditionalExecutionQueue.java：187）
+在 org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.access$700（DefaultConditionalExecutionQueue.java：120）
+在 org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner$1.run（DefaultConditionalExecutionQueue.java：162）
+在 org.gradle.internal.Factories$1.create（Factories.java：31）
+在 org.gradle.internal.work.DefaultWorkerLeaseService.withLocks（DefaultWorkerLeaseService.java：264）
+在 org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread（DefaultWorkerLeaseService.java：128）
+在 org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread（DefaultWorkerLeaseService.java：133）
+在 org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.runBatch（DefaultConditionalExecutionQueue.java：157）
+在 org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.run（DefaultConditionalExecutionQueue.java：126）
+...还有 2 个
+
+
+构建在 2 分 32 秒内失败
+23 个可作任务：23 个已执行
+错误：流程完成，退出代码为 1。
