@@ -99,9 +99,12 @@ class OverlayService : Service() {
         val channelId = "netprobe_overlay"
         val nm = getSystemService(NotificationManager::class.java)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // 提升重要级别，避免被 MIUI 静默隐藏
+            // 提升重要级别，尽量避免被 MIUI 静默隐藏
             val channel = NotificationChannel(channelId, "NetProbeOverlay", NotificationManager.IMPORTANCE_HIGH)
             channel.setShowBadge(true)
+            channel.enableVibration(true)
+            channel.enableLights(true)
+            channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
             nm.createNotificationChannel(channel)
         }
         val intent = Intent(this, MainActivity::class.java)
@@ -113,12 +116,20 @@ class OverlayService : Service() {
             .setSmallIcon(android.R.drawable.stat_sys_download)
             .setContentIntent(pi)
             .setOngoing(true)
+            .setCategory(NotificationCompat.CATEGORY_SERVICE)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
         if (Build.VERSION.SDK_INT >= 31) {
             builder.setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
         }
         val notif: Notification = builder.build()
-        startForeground(1, notif)
+        try {
+            startForeground(1, notif)
+        } catch (e: Exception) {
+            // Android 13+ 未授予通知权限或厂商限制导致启动前台失败
+            Toast.makeText(this, "前台通知启动失败：${e.message}", Toast.LENGTH_LONG).show()
+            broadcast("failed", "前台通知启动失败，可能未授予通知权限")
+            stopSelf()
+        }
     }
 
     private fun commonLayoutParams(): WindowManager.LayoutParams {
