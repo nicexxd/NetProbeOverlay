@@ -282,9 +282,9 @@ class OverlayService : Service() {
         tvNode.text = "节点：当前"
         tvAddr.text = "地址：通过系统代理"
         tvLatency.text = "延迟：测试中..."
-        tvBandwidth.text = "带宽：测试中..."
+        tvBandwidth.text = "上行带宽：测试中..."
 
-        showPanelFor(5000)
+        showPanelFor(10_000)
 
         scope.launch {
             val latency = NetProbe.measureLatency()
@@ -292,9 +292,9 @@ class OverlayService : Service() {
                 tvLatency.text = if (latency >= 0) "延迟：${latency} ms" else "延迟：失败"
             }
 
-            val bandwidth = NetProbe.measureBandwidth()
+            val upload = NetProbe.measureUploadBandwidth(durationMillis = 10_000)
             withContext(Dispatchers.Main) {
-                tvBandwidth.text = if (bandwidth >= 0) "带宽：${bandwidth} Mbps" else "带宽：失败"
+                tvBandwidth.text = if (upload >= 0) "上行带宽：${upload} Mbps" else "上行带宽：失败"
             }
         }
     }
