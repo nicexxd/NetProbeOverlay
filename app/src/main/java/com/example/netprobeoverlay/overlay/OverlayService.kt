@@ -11,6 +11,7 @@ import android.graphics.PixelFormat
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.view.Gravity
@@ -43,7 +44,7 @@ class OverlayService : Service() {
     private val serviceJob = Job()
     private val scope = CoroutineScope(Dispatchers.Main + serviceJob)
 
-    private val handler = Handler(mainLooper)
+    private val handler = Handler(Looper.getMainLooper())
 
     private var overlaysAdded = false
 
