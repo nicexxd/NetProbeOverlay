@@ -173,58 +173,58 @@ class OverlayService : Service() {
             true
         } catch (e: Exception) {
             Log.e("OverlayService", "Failed to add overlay button", e)
-+            Toast.makeText(this, "无法显示悬浮窗按钮，可能被系统限制。" + miuiTips(), Toast.LENGTH_LONG).show()
-             false
-         }
-     }
+            Toast.makeText(this, "无法显示悬浮窗按钮，可能被系统限制。" + miuiTips(), Toast.LENGTH_LONG).show()
+            false
+        }
+    }
 
-     private fun addOverlayPanelSafely(): Boolean {
-         return try {
-             val inflater = LayoutInflater.from(this)
-             overlayPanel = inflater.inflate(R.layout.overlay_panel, null)
-             overlayPanel.visibility = View.GONE
-             val params = commonLayoutParams().apply {
-                 y += 70 // 面板略微在按钮下方
-                 flags = flags or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE // 不拦截触摸，完全透传
-             }
-             windowManager.addView(overlayPanel, params)
-             true
-         } catch (e: Exception) {
-             Log.e("OverlayService", "Failed to add overlay panel", e)
-+            Toast.makeText(this, "无法显示悬浮窗面板，可能被系统限制。" + miuiTips(), Toast.LENGTH_LONG).show()
-             false
-         }
-     }
+    private fun addOverlayPanelSafely(): Boolean {
+        return try {
+            val inflater = LayoutInflater.from(this)
+            overlayPanel = inflater.inflate(R.layout.overlay_panel, null)
+            overlayPanel.visibility = View.GONE
+            val params = commonLayoutParams().apply {
+                y += 70 // 面板略微在按钮下方
+                flags = flags or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE // 不拦截触摸，完全透传
+            }
+            windowManager.addView(overlayPanel, params)
+            true
+        } catch (e: Exception) {
+            Log.e("OverlayService", "Failed to add overlay panel", e)
+            Toast.makeText(this, "无法显示悬浮窗面板，可能被系统限制。" + miuiTips(), Toast.LENGTH_LONG).show()
+            false
+        }
+    }
 
-     private fun showPanelFor(ms: Long) {
-         overlayPanel.visibility = View.VISIBLE
-         handler.removeCallbacksAndMessages(null)
-         handler.postDelayed({ overlayPanel.visibility = View.GONE }, ms)
-     }
+    private fun showPanelFor(ms: Long) {
+        overlayPanel.visibility = View.VISIBLE
+        handler.removeCallbacksAndMessages(null)
+        handler.postDelayed({ overlayPanel.visibility = View.GONE }, ms)
+    }
 
-     private fun triggerTestAndShowPanel() {
-         val tvNode = overlayPanel.findViewById<TextView>(R.id.tvNode)
-         val tvAddr = overlayPanel.findViewById<TextView>(R.id.tvAddr)
-         val tvLatency = overlayPanel.findViewById<TextView>(R.id.tvLatency)
-         val tvBandwidth = overlayPanel.findViewById<TextView>(R.id.tvBandwidth)
+    private fun triggerTestAndShowPanel() {
+        val tvNode = overlayPanel.findViewById<TextView>(R.id.tvNode)
+        val tvAddr = overlayPanel.findViewById<TextView>(R.id.tvAddr)
+        val tvLatency = overlayPanel.findViewById<TextView>(R.id.tvLatency)
+        val tvBandwidth = overlayPanel.findViewById<TextView>(R.id.tvBandwidth)
 
-         tvNode.text = "节点：当前"
-         tvAddr.text = "地址：通过系统代理"
-         tvLatency.text = "延迟：测试中..."
-         tvBandwidth.text = "带宽：测试中..."
+        tvNode.text = "节点：当前"
+        tvAddr.text = "地址：通过系统代理"
+        tvLatency.text = "延迟：测试中..."
+        tvBandwidth.text = "带宽：测试中..."
 
-         showPanelFor(5000)
+        showPanelFor(5000)
 
-         scope.launch {
-             val latency = NetProbe.measureLatency()
-             withContext(Dispatchers.Main) {
-                 tvLatency.text = if (latency >= 0) "延迟：${latency} ms" else "延迟：失败"
-             }
+        scope.launch {
+            val latency = NetProbe.measureLatency()
+            withContext(Dispatchers.Main) {
+                tvLatency.text = if (latency >= 0) "延迟：${latency} ms" else "延迟：失败"
+            }
 
-             val bandwidth = NetProbe.measureBandwidth()
-             withContext(Dispatchers.Main) {
-                 tvBandwidth.text = if (bandwidth >= 0) "带宽：${bandwidth} Mbps" else "带宽：失败"
-             }
-         }
-     }
+            val bandwidth = NetProbe.measureBandwidth()
+            withContext(Dispatchers.Main) {
+                tvBandwidth.text = if (bandwidth >= 0) "带宽：${bandwidth} Mbps" else "带宽：失败"
+            }
+        }
+    }
 }
