@@ -40,6 +40,15 @@ class OverlayService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? = null
 
+    // 兼容提示：根据厂商给出更贴切的引导
+    private fun miuiTips(): String {
+        return if (Build.MANUFACTURER.equals("Xiaomi", true)) {
+            "请在 MIUI 设置中开启：显示悬浮窗、后台弹出界面、自启动，并允许通知。"
+        } else {
+            "请在系统设置中开启“在其他应用上层显示”与通知权限，必要时允许自启动/后台弹出界面。"
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
         startAsForeground()
@@ -56,6 +65,7 @@ class OverlayService : Service() {
         val addedPanel = addOverlayPanelSafely()
         if (!addedBtn || !addedPanel) {
             // 添加失败（某些系统/ROM限制），安全退出
+            Toast.makeText(this, "悬浮窗添加失败，" + miuiTips(), Toast.LENGTH_LONG).show()
             stopForeground(STOP_FOREGROUND_REMOVE)
             stopSelf()
         }
@@ -98,6 +108,7 @@ class OverlayService : Service() {
             type,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or // 不抢焦点，不影响其他区域触摸
                     WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
+                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
                     WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
             PixelFormat.TRANSLUCENT
         ).apply {
@@ -162,56 +173,58 @@ class OverlayService : Service() {
             true
         } catch (e: Exception) {
             Log.e("OverlayService", "Failed to add overlay button", e)
-            false
-        }
-    }
++            Toast.makeText(this, "无法显示悬浮窗按钮，可能被系统限制。" + miuiTips(), Toast.LENGTH_LONG).show()
+             false
+         }
+     }
 
-    private fun addOverlayPanelSafely(): Boolean {
-        return try {
-            val inflater = LayoutInflater.from(this)
-            overlayPanel = inflater.inflate(R.layout.overlay_panel, null)
-            overlayPanel.visibility = View.GONE
-            val params = commonLayoutParams().apply {
-                y += 70 // 面板略微在按钮下方
-                flags = flags or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE // 不拦截触摸，完全透传
-            }
-            windowManager.addView(overlayPanel, params)
-            true
-        } catch (e: Exception) {
-            Log.e("OverlayService", "Failed to add overlay panel", e)
-            false
-        }
-    }
+     private fun addOverlayPanelSafely(): Boolean {
+         return try {
+             val inflater = LayoutInflater.from(this)
+             overlayPanel = inflater.inflate(R.layout.overlay_panel, null)
+             overlayPanel.visibility = View.GONE
+             val params = commonLayoutParams().apply {
+                 y += 70 // 面板略微在按钮下方
+                 flags = flags or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE // 不拦截触摸，完全透传
+             }
+             windowManager.addView(overlayPanel, params)
+             true
+         } catch (e: Exception) {
+             Log.e("OverlayService", "Failed to add overlay panel", e)
++            Toast.makeText(this, "无法显示悬浮窗面板，可能被系统限制。" + miuiTips(), Toast.LENGTH_LONG).show()
+             false
+         }
+     }
 
-    private fun showPanelFor(ms: Long) {
-        overlayPanel.visibility = View.VISIBLE
-        handler.removeCallbacksAndMessages(null)
-        handler.postDelayed({ overlayPanel.visibility = View.GONE }, ms)
-    }
+     private fun showPanelFor(ms: Long) {
+         overlayPanel.visibility = View.VISIBLE
+         handler.removeCallbacksAndMessages(null)
+         handler.postDelayed({ overlayPanel.visibility = View.GONE }, ms)
+     }
 
-    private fun triggerTestAndShowPanel() {
-        val tvNode = overlayPanel.findViewById<TextView>(R.id.tvNode)
-        val tvAddr = overlayPanel.findViewById<TextView>(R.id.tvAddr)
-        val tvLatency = overlayPanel.findViewById<TextView>(R.id.tvLatency)
-        val tvBandwidth = overlayPanel.findViewById<TextView>(R.id.tvBandwidth)
+     private fun triggerTestAndShowPanel() {
+         val tvNode = overlayPanel.findViewById<TextView>(R.id.tvNode)
+         val tvAddr = overlayPanel.findViewById<TextView>(R.id.tvAddr)
+         val tvLatency = overlayPanel.findViewById<TextView>(R.id.tvLatency)
+         val tvBandwidth = overlayPanel.findViewById<TextView>(R.id.tvBandwidth)
 
-        tvNode.text = "节点：当前"
-        tvAddr.text = "地址：通过系统代理"
-        tvLatency.text = "延迟：测试中..."
-        tvBandwidth.text = "带宽：测试中..."
+         tvNode.text = "节点：当前"
+         tvAddr.text = "地址：通过系统代理"
+         tvLatency.text = "延迟：测试中..."
+         tvBandwidth.text = "带宽：测试中..."
 
-        showPanelFor(5000)
+         showPanelFor(5000)
 
-        scope.launch {
-            val latency = NetProbe.measureLatency()
-            withContext(Dispatchers.Main) {
-                tvLatency.text = if (latency >= 0) "延迟：${latency} ms" else "延迟：失败"
-            }
+         scope.launch {
+             val latency = NetProbe.measureLatency()
+             withContext(Dispatchers.Main) {
+                 tvLatency.text = if (latency >= 0) "延迟：${latency} ms" else "延迟：失败"
+             }
 
-            val bandwidth = NetProbe.measureBandwidth()
-            withContext(Dispatchers.Main) {
-                tvBandwidth.text = if (bandwidth >= 0) "带宽：${bandwidth} Mbps" else "带宽：失败"
-            }
-        }
-    }
+             val bandwidth = NetProbe.measureBandwidth()
+             withContext(Dispatchers.Main) {
+                 tvBandwidth.text = if (bandwidth >= 0) "带宽：${bandwidth} Mbps" else "带宽：失败"
+             }
+         }
+     }
 }
